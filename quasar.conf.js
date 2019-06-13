@@ -7,7 +7,7 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
-      'axios'
+      'api'
     ],
 
     css: [
@@ -31,6 +31,7 @@ module.exports = function (ctx) {
         'QBreadcrumbsEl',
         'QBtn',
         'QBtnDropdown',
+        'QBtnGroup',
         'QBtnToggle',
         'QCard',
         'QCardSection',
@@ -58,6 +59,7 @@ module.exports = function (ctx) {
         'QPageContainer',
         'QPageSticky',
         'QPopupProxy',
+        'QRouteTab',
         'QSelect',
         'QSeparator',
         'QSpinner',
@@ -67,8 +69,6 @@ module.exports = function (ctx) {
         'QStepper',
         'QStepperNavigation',
         'QTab',
-        'QTabPanels',
-        'QTabPanel',
         'QTabs',
         'QToggle',
         'QToolbar',
@@ -118,7 +118,13 @@ module.exports = function (ctx) {
     devServer: {
       // https: true,
       // port: 8080,
-      open: false // opens browser window automatically
+      open: false, // opens browser window automatically
+
+      proxy: {
+        '/api': {
+          target: 'http://localhost:9000'
+        }
+      }
     },
 
     // animations: 'all', // --- includes all animations

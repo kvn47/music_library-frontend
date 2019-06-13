@@ -1,6 +1,7 @@
-import SettingsAPI from 'api/settings'
+import { API } from 'boot/api'
+
+const resource = 'settings'
 
 export const fetch_settings = ({commit}) => {
-  return SettingsAPI.get()
-    .then(settings => commit('set_settings', settings))
+  return API.query(resource).then(settings => commit('set_settings', settings))
 }

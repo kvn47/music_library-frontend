@@ -1,7 +1,9 @@
-import API from 'api/notes'
+import { API } from 'boot/api'
 
-export const fetch_notes = ({ commit }) => {
-  return API.query().then(notes => commit('set_notes', notes))
+const resource = 'notes'
+
+export const fetch_notes = ({ commit }, params) => {
+  return API.query(resource, params)
 
   // return notes_collection.onSnapshot(res => {
   //   const notes = []
@@ -16,12 +18,12 @@ export const fetch_notes = ({ commit }) => {
 }
 
 export function fetch_note ({ commit }, id) {
-  return API.get(id)
+  return API.get(resource, id)
     // .then(note => build_note(note))
 }
 
 export function create_note ({ commit }, data) {
-  return API.create(data).then(note => commit('add_note', note))
+  return API.create(resource, data).then(note => commit('add_note', note))
 
   // return notes_collection.add(data)
 
@@ -34,11 +36,11 @@ export function create_note ({ commit }, data) {
 }
 
 export function update_note ({ commit }, note) {
-  return API.update(note).then(note => commit('replace_note', note))
+  return API.update(resource, note).then(note => commit('replace_note', note))
 }
 
 export function delete_note ({ commit }, note) {
-  return API.delete(note.id).then(id => commit('remove_note', id))
+  return API.delete(resource, note.id).then(id => commit('remove_note', id))
 }
 
 // function build_note (doc) {
