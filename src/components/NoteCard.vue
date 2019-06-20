@@ -93,7 +93,7 @@ export default {
       this.$q.dialog({
         component: NoteForm,
         root: this.$root,
-        note: this.note
+        note: Object.assign({}, this.note)
       })
     }
   }
