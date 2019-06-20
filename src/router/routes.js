@@ -26,8 +26,13 @@ export default [
     path: '/notes',
     component: () => import('layouts/NotesLayout.vue'),
     children: [
-      {name: 'notes', path: '', component: () => import('pages/NotesPage.vue'), props: {kind: 'released'}},
-      {name: 'notes_kind', path: ':kind', component: () => import('pages/NotesPage.vue'), props: true}
+      {
+        name: 'notes',
+        path: ':kind',
+        props: true,
+        component: () => import('pages/NotesPage.vue')
+      },
+      // {name: 'notes_kind', path: ':kind', component: () => import('pages/NotesPage.vue'), props: true}
     ]
   },
 

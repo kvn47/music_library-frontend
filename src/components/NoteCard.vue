@@ -26,29 +26,29 @@
 </template>
 
 <script>
+import NoteForm from 'components/NoteForm'
 import { mapGetters, mapActions } from 'vuex'
 import { note_label } from 'lib/note'
 
 export default {
   name: 'NoteCard',
-  inject: ['edit_note'],
 
   props: {
     note: {
       type: Object,
-      default () { return Object.new }
+      default () { return {} }
     }
   },
 
   data () {
     return {
       search_sources: {
+        'Deezer': 'https://www.deezer.com/search/',
+        'Youtube Music': 'https://music.youtube.com/search?q=',
+        'Youtube': 'https://www.youtube.com/results?search_query=',
         'Google': 'https://www.google.com/search?q=',
         'Google Music': 'https://play.google.com/music/listen#/sr/',
         'Google Play': 'https://play.google.com/store/search?c=music&q=',
-        'Youtube Music': 'https://music.youtube.com/search?q=',
-        'Youtube': 'https://www.youtube.com/results?search_query=',
-        'Deezer': 'https://www.deezer.com/search/',
         'RuTracker': 'https://rutracker.org/forum/tracker.php?nm=',
         'RuTor': 'http://open-ru.top/search//0/2/000/0/',
         'Yandex': 'https://yandex.ru/search/?text='
@@ -87,6 +87,14 @@ export default {
     advance_note () {
       this.note.kind = this.note_kinds[this.note.kind].next
       this.update_note(this.note)
+    },
+
+    edit_note () {
+      this.$q.dialog({
+        component: NoteForm,
+        root: this.$root,
+        note: this.note
+      })
     }
   }
 }

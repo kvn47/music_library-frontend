@@ -11,20 +11,47 @@
           />
           Notes
         </q-toolbar-title>
+        <q-space/>
+
+<!--        <q-input-->
+<!--          v-model="search_query"-->
+<!--          input-class="text-right"-->
+<!--          dark-->
+<!--          borderless-->
+<!--        >-->
+<!--          <template v-slot:append>-->
+<!--            <q-icon v-if="search_query === ''" name="search"/>-->
+<!--            <q-icon v-else @click="search_query = ''" name="clear" class="cursor-pointer"/>-->
+<!--          </template>-->
+<!--        </q-input>-->
+<!--        <q-btn-->
+<!--          @click="search"-->
+<!--          icon="fas fa-search on-left"-->
+<!--          flat-->
+<!--          round-->
+<!--          dense-->
+<!--        />-->
         <q-btn
           @click="new_note"
           icon="fas fa-plus"
-          color="positive"
           flat
           round
           dense
         />
       </q-toolbar>
 
+<!--      <q-input-->
+<!--        v-if="searching"-->
+<!--        v-model="search_query"-->
+<!--        clearable-->
+<!--      >-->
+
+<!--      </q-input>-->
+
       <q-tabs
-        indicator-color="accent"
+        indicator-color="white"
+        :active-color="current_kind_color"
         align="justify"
-        active-color="accent"
       >
         <template v-for="(kind, name) in note_kinds">
           <q-route-tab
@@ -41,34 +68,44 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-
-<!--    <q-dialog v-model="is_modal_visible" style="width: 700px; max-width: 80vw;" persistent>-->
-<!--      <q-card>-->
-<!--        <q-toolbar :class="`bg-${form_color} text-white`">-->
-<!--          <q-btn @click="close_form" flat round dense icon="fas fa-times"/>-->
-<!--          <q-toolbar-title>{{ form_title }}</q-toolbar-title>-->
-<!--        </q-toolbar>-->
-<!--        <div class="layout-padding">-->
-<!--          <note-form :note="active_note" @submit-form="save_note"/>-->
-<!--        </div>-->
-<!--      </q-card>-->
-<!--    </q-dialog>-->
   </q-layout>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import NoteForm from 'components/NoteForm'
 
   export default {
     name: 'NotesLayout',
 
+    data () {
+      return {
+        // searching: false,
+        // search_query: ''
+      }
+    },
+
     computed: {
-      ...mapGetters(['note_kinds'])
+      note_kinds () {
+        return this.$store.state.notes.note_kinds
+      },
+
+      current_kind_color () {
+        return this.note_kinds[this.$route.params.kind].color
+      }
     },
 
     methods: {
+      // search () {
+      //   this.searching = !this.searching
+      // },
+
       new_note () {
-        // TODO Show dialog with new note form
+        this.$q.dialog({
+          component: NoteForm,
+          root: this.$root
+        }).onOk(() => {
+          console.log('New note OK')
+        })
       }
     }
   }

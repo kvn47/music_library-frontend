@@ -3,7 +3,10 @@ import { Notify } from "quasar"
 
 
 const the_axios = axios.create({
-  baseURL: '/api'
+  baseURL: '/api',
+  headers: {
+    'Accept': 'application/json'
+  }
 })
 
 const handle_error = (error) => {
@@ -42,7 +45,7 @@ const handle_error = (error) => {
 
 const API = {
   query (resource, params) {
-    return the_axios.get(resource, params)
+    return the_axios.get(resource, {params})
   },
 
   post (path, data) {

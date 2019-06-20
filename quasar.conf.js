@@ -62,6 +62,7 @@ module.exports = function (ctx) {
         'QRouteTab',
         'QSelect',
         'QSeparator',
+        'QSpace',
         'QSpinner',
         'QSpinnerBars',
         'QSpinnerPie',
@@ -83,7 +84,8 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
-        'Notify'
+        'Notify',
+        'Dialog'
       ],
 
       // iconSet: 'ionicons-v4'

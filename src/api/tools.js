@@ -1,4 +1,4 @@
-import API from './api'
+import API from 'boot/api'
 
 export default {
   collect_info (params) {

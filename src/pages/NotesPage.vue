@@ -5,7 +5,7 @@
         v-for="note in notes"
         :key="note.id"
         group="notes"
-        :label="label(notes)"
+        :label="label(note)"
         :caption="caption(note)"
         expand-icon="fas fa-angle-down"
         popup
@@ -17,26 +17,32 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import NoteCard from 'components/NoteCard'
   import { note_label } from 'lib/note'
 
   export default {
     name: 'NotesPage',
     props: ['kind'],
+    components: { NoteCard },
 
-    data () {
-      return {
-        notes: []
+    created () {
+      this.fetch_notes()
+    },
+
+    watch: {
+      '$route': 'fetch_notes'
+    },
+
+    computed: {
+      notes () {
+        return this.$store.state.notes.notes
       }
     },
 
-    created () {
-      this.fetch_notes({kind: this.kind})
-        .then(notes => this.notes = notes)
-    },
-
     methods: {
-      ...mapActions(['fetch_notes']),
+      fetch_notes () {
+        this.$store.dispatch('fetch_notes', {kind: this.kind})
+      },
 
       label (note) { return note_label(note) },
 
