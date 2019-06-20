@@ -59,7 +59,7 @@
             :name="name"
             :icon="kind.icon"
             :color="kind.color"
-            :to="name"
+            :to="{name: 'notes', params: {kind: name}}"
           />
         </template>
       </q-tabs>
@@ -90,7 +90,11 @@
       },
 
       current_kind_color () {
-        return this.note_kinds[this.$route.params.kind].color
+        if (this.$route.params.kind === undefined) {
+          return 'accent'
+        } else {
+          return this.note_kinds[this.$route.params.kind].color
+        }
       }
     },
 

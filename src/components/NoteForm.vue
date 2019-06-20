@@ -85,7 +85,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 import { date } from 'quasar'
 // import API from 'api/artists'
 
@@ -106,14 +105,9 @@ export default {
   },
 
   computed: {
-    ...mapState(['note_kinds']),
-
     kind_options () {
-      if (this.note_kinds) {
-        return Object.entries(this.note_kinds).map((kind) => { return { icon: kind[1].icon, value: kind[0] } })
-      } else {
-        return []
-      }
+      return Object.entries(this.$store.state.notes.note_kinds)
+        .map((kind) => { return { icon: kind[1].icon, value: kind[0] } })
     },
 
     is_download_url_visible () {
@@ -142,8 +136,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(['create_note', 'update_note']),
-
     show () {
       this.$refs.note_form.show()
     },
@@ -170,10 +162,9 @@ export default {
 
     submit_form () {
       if (this.note.id === undefined) {
-        this.create_note(this.note)
+        this.$store.dispatch('create_note', this.note)
       } else {
-        this.update_note(this.note)
-        // this.update_note(Object.assign({id: this.note.id}, this.note))
+        this.$store.dispatch('update_note', this.note)
       }
       this.$emit('ok')
       this.hide()

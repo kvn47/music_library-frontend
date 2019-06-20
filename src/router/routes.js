@@ -28,7 +28,7 @@ export default [
     children: [
       {
         name: 'notes',
-        path: ':kind',
+        path: ':kind?',
         props: true,
         component: () => import('pages/NotesPage.vue')
       },
