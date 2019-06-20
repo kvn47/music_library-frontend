@@ -19,7 +19,7 @@
       </q-btn-dropdown>
       <q-btn @click="copy_label()" icon="far fa-copy" color="secondary" flat/>
       <q-btn @click="edit_note(note)" icon="fas fa-edit" color="secondary" flat/>
-      <q-btn @click="advance_note()" :icon="next_kind.icon" :color="next_kind.color" flat/>
+      <q-btn @click="advance_note(note)" :icon="next_kind.icon" :color="next_kind.color" flat/>
       <q-btn @click="delete_note(note)" icon="fas fa-trash" color="negative" flat/>
     </q-card-actions>
   </q-card>
@@ -57,15 +57,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['note_kinds', 'next_kind_for']),
-
     next_kind () {
-      return this.next_kind_for(this.note.kind)
+      return this.$store.getters.next_kind_for(this.note.kind)
     }
   },
 
   methods: {
-    ...mapActions(['update_note', 'delete_note']),
+    ...mapActions(['update_note', 'advance_note', 'delete_note']),
 
     copy_label () {
       navigator.clipboard.writeText(note_label(this.note))
@@ -82,11 +80,6 @@ export default {
       const query = [this.note.artist, this.note.album].join(' ')
       const uri = encodeURI(this.search_sources[source] + query)
       window.open(uri)
-    },
-
-    advance_note () {
-      this.note.kind = this.note_kinds[this.note.kind].next
-      this.update_note(this.note)
     },
 
     edit_note () {

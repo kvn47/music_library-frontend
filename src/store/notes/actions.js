@@ -23,6 +23,11 @@ export function update_note ({ commit }, note) {
   return the_axios.put(`${resource}/${note.id}`, {note}).then(note => commit('replace_note', note))
 }
 
+export function advance_note ({commit, state}, note) {
+  const new_kind = state.note_kinds[note.kind].next
+  return the_axios.put(`${resource}/${note.id}`, {note: {kind: new_kind}}).then(() => commit('remove_note', note.id))
+}
+
 export function delete_note ({ commit }, note) {
   // return API.delete(resource, note.id).then(id => commit('remove_note', id))
   return the_axios.delete(`${resource}/${note.id}`).then(id => commit('remove_note', id))
