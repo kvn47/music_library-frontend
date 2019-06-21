@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Music Library",
   "productName": "Music Library",
-  "cordovaId": "org.cordova.quasar.app",
+  "cordovaId": "org.cordova.quasar.music-library",
   "author": "Vladimir Kochergin <kvn047@gmail.com>",
   "private": true,
   "scripts": {

@@ -124,7 +124,7 @@ module.exports = function (ctx) {
 
       proxy: {
         '/api': {
-          target: 'http://localhost:9000'
+          target: ctx.dev ? 'http://localhost:9000' : 'https://music-library.gigalixirapp.com'
         }
       }
     },
@@ -140,9 +140,9 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        // name: 'Quasar App',
-        // short_name: 'Quasar-PWA',
-        // description: 'Best PWA App in town!',
+        name: 'Music Library',
+        short_name: 'Music Lib',
+        description: 'Music Library',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -178,7 +178,7 @@ module.exports = function (ctx) {
     },
 
     cordova: {
-      // id: 'org.cordova.quasar.app'
+      id: 'org.cordova.quasar.music-library'
       // noIosLegacyBuildFlag: true // uncomment only if you know what you are doing
     },
 
