@@ -10,12 +10,12 @@
     "__internal": {
       "dev": {
         "spa": {
-          "iconHash": "ef8959859c7d6a339596343addac6201"
+          "iconHash": "750c8db4629ffb8b6d856f19bd27b2ef"
         }
       },
       "build": {
         "pwa": {
-          "iconHash": "ef8959859c7d6a339596343addac6201"
+          "iconHash": "750c8db4629ffb8b6d856f19bd27b2ef"
         }
       }
     }
