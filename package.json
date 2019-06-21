@@ -3,12 +3,13 @@
   "version": "0.0.1",
   "description": "Music Library",
   "productName": "Music Library",
-  "cordovaId": "org.cordova.quasar.music-library",
+  "cordovaId": "org.cordova.quasar.music_library",
   "author": "Vladimir Kochergin <kvn047@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "quasar dev -p 8000",
-    "build": "quasar build -m pwa",
+    "build:pwa": "quasar build -m pwa",
+    "build:android": "quasar build -m android",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {

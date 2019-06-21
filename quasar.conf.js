@@ -178,7 +178,7 @@ module.exports = function (ctx) {
     },
 
     cordova: {
-      id: 'org.cordova.quasar.music-library'
+      id: 'org.cordova.quasar.music_library'
       // noIosLegacyBuildFlag: true // uncomment only if you know what you are doing
     },
 
