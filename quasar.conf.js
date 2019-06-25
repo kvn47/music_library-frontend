@@ -95,8 +95,15 @@ module.exports = function (ctx) {
     supportIE: false,
 
     build: {
+      env: ctx.prod ? {
+        API: JSON.stringify('https://music-library.gigalixirapp.com')
+      } : {
+        API: JSON.stringify('')
+      },
+
       scopeHoisting: true,
       vueRouterMode: 'history',
+      // vueRouterMode: 'hash',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
@@ -118,15 +125,15 @@ module.exports = function (ctx) {
     },
 
     devServer: {
-      // https: true,
-      // port: 8080,
-      open: false, // opens browser window automatically
+      https: true,
+      port: 8000,
+      open: false // opens browser window automatically
 
-      proxy: {
-        '/api': {
-          target: ctx.dev ? 'http://localhost:9000' : 'https://music-library.gigalixirapp.com'
-        }
-      }
+      // proxy: {
+      //   '/api': {
+      //     target: 'http://localhost:9000'
+      //   }
+      // }
     },
 
     // animations: 'all', // --- includes all animations
