@@ -102,8 +102,8 @@ module.exports = function (ctx) {
       },
 
       scopeHoisting: true,
-      vueRouterMode: 'history',
-      // vueRouterMode: 'hash',
+      // vueRouterMode: 'history',
+      vueRouterMode: 'hash',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
@@ -127,13 +127,13 @@ module.exports = function (ctx) {
     devServer: {
       https: true,
       port: 8000,
-      open: false // opens browser window automatically
+      open: false,
 
-      // proxy: {
-      //   '/api': {
-      //     target: 'http://localhost:9000'
-      //   }
-      // }
+      proxy: {
+        '/api': {
+          target: 'https://localhost:9000'
+        }
+      }
     },
 
     // animations: 'all', // --- includes all animations

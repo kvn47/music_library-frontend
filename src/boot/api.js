@@ -9,30 +9,30 @@ const the_axios = axios.create({
 })
 
 const handle_error = (error) => {
+  const req = `${error.config.method} ${error.config.url.replace(error.config.baseURL, '')}`
+  let error_message = ''
   let error_details = ''
 
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
+    error_message = `[API] ${req} => ${error.response.status} (${error.response.statusText})`
     error_details = error.response.data.errors
   } else if (error.request) {
     // The request was made but no response was received
     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
     // http.ClientRequest in node.js
+    error_message = `[API] ${req} => no response`
+    error_details = error.message
     console.log(error.request)
   } else {
     // Something happened in setting up the request that triggered an Error
-    console.log('Error', error.message)
+    error_message = `[API] ${req} => request error`
+    error_details = error.message
   }
 
-  // return new Error(`[API] ${error.request.method} ${error.request.url} => ${error.response.data}`)
-  const req = `${error.config.method} ${error.config.url.replace(error.config.baseURL, '')}`
-  const resp = `${error.response.status} (${error.response.statusText})`
-  const error_message = `[API] ${req} => ${resp}`
-
   Notify.create({
-    message: error_message,
-    detail: error_details,
+    message: `${error_message}\n\r${error_details}`,
     color: 'negative',
     textColor: 'white',
     timeout: 0,
