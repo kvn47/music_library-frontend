@@ -43,8 +43,8 @@ const handle_error = (error) => {
 }
 
 const API = {
-  query (resource, params) {
-    return the_axios.get(`${resource}.json`, {params})
+  query (path, params) {
+    return the_axios.get(path, {params})
   },
 
   post (path, data) {
@@ -76,6 +76,7 @@ the_axios.interceptors.response.use(response => {
 
 export default async ({ Vue }) => {
   Vue.prototype.$axios = the_axios
+  Vue.prototype.$api = API
 }
 
 export { API, the_axios }

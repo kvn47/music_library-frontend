@@ -9,7 +9,7 @@ export default [
       {name: 'import', path: 'import', component: () => import('pages/AlbumsImportPage.vue')},
       {name: 'export_lists', path: 'export_lists', component: () => import('pages/ExportListsPage.vue')},
       {name: 'tracklists', path: 'tracklists', component: () => import('pages/TracklistsPage.vue')},
-      {name: 'tracklist', path: 'tracklists/:id', component: () => import('pages/TracklistPage.vue'), props: true},
+      {name: 'tracklist', path: 'tracklists/:id', props: true, component: () => import('pages/TracklistPage.vue')},
       {name: 'organizer', path: 'organizer', component: () => import('pages/AlbumOrganizerPage.vue')}
     ]
   },
@@ -32,7 +32,6 @@ export default [
         props: true,
         component: () => import('pages/NotesPage.vue')
       },
-      // {name: 'notes_kind', path: ':kind', component: () => import('pages/NotesPage.vue'), props: true}
     ]
   },
 

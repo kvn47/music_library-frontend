@@ -98,7 +98,7 @@ module.exports = function (ctx) {
       env: ctx.prod ? {
         API: JSON.stringify('https://music-library.gigalixirapp.com')
       } : {
-        API: JSON.stringify('')
+        API: JSON.stringify('http://localhost:9000')
       },
 
       scopeHoisting: true,
@@ -125,15 +125,15 @@ module.exports = function (ctx) {
     },
 
     devServer: {
-      https: true,
+      // https: true,
       port: 8000,
       open: false,
 
-      proxy: {
-        '/api': {
-          target: 'https://localhost:9000'
-        }
-      }
+      // proxy: {
+      //   '/api': {
+      //     target: 'https://localhost:9000'
+      //   }
+      // }
     },
 
     // animations: 'all', // --- includes all animations

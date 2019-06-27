@@ -100,7 +100,6 @@
 <script>
 
 import AlbumForm from 'components/AlbumForm'
-import ToolsAPI from 'api/tools'
 
 export default {
   name: 'AlbumOrganizerPage',
@@ -128,7 +127,7 @@ export default {
 
       this.collecting_info = true
 
-      ToolsAPI.collect_info({path: this.source_path, artist: this.artist, album: this.album, collect_mb_info: this.collect_mb_info})
+      this.$api.query('music_info', {path: this.source_path, artist: this.artist, album: this.album, collect_mb_info: this.collect_mb_info})
         .then((source_infos) => {
           source_infos.forEach(source_info => {
             source_info.albums.forEach(album => {
@@ -169,7 +168,7 @@ export default {
 
       this.organizing = true
 
-      ToolsAPI.organize_files({path: this.source_path, source_infos: this.source_infos, dst_path: this.dst_path, copy_files: this.copy_files})
+      this.$api.query('organize_files', {path: this.source_path, source_infos: this.source_infos, dst_path: this.dst_path, copy_files: this.copy_files})
         .finally(() => {
           this.organizing = false
         })

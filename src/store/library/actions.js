@@ -1,5 +1,5 @@
-import LibraryAPI from 'api/library'
+import {API} from 'boot/api'
 
 export const rescan_library = () => {
-  return LibraryAPI.rescan()
+  return API.post('library')
 }

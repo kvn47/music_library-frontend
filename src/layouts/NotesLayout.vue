@@ -4,11 +4,7 @@
     <q-header reveal elevated class="bg-primary text-white">
       <q-toolbar>
         <q-toolbar-title>
-          <q-btn
-            :to="{name: 'home'}"
-            icon="fas fa-arrow-left"
-            flat
-          />
+          <home-button/>
           Notes
         </q-toolbar-title>
         <q-space/>
@@ -73,9 +69,11 @@
 
 <script>
   import NoteForm from 'components/NoteForm'
+  import HomeButton from 'components/HomeButton'
 
   export default {
     name: 'NotesLayout',
+    components: {HomeButton},
 
     data () {
       return {

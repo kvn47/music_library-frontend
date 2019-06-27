@@ -33,6 +33,16 @@
         class="full-width"
       />
     </q-btn-group>
+
+    <q-btn
+      :to="{name: 'organizer'}"
+      icon="fas fa-align-justify"
+      label="Organizer"
+      color="primary"
+      size="xl"
+      outline
+      class="full-width"
+    />
   </q-page>
 </template>
 

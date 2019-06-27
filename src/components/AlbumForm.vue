@@ -196,9 +196,6 @@
 </template>
 
 <script>
-
-import ToolsAPI from 'api/tools'
-
 export default {
   name: 'AlbumForm',
 
@@ -232,7 +229,7 @@ export default {
     find_work_info () {
       this.searching_work = true
 
-      ToolsAPI.find_work_info({title: this.album.title, artist: this.album.artist, artist_mbid: this.artist_mbid})
+      this.$api.query('find_work_info', {title: this.album.title, artist: this.album.artist, artist_mbid: this.artist_mbid})
         .then(work_info => {
           console.log(this.album)
           // this.album.mb_artists = work_info.artists
@@ -262,7 +259,7 @@ export default {
         return
       }
 
-      ToolsAPI.search_artist({name: name})
+      this.$api.query('search_artist', {name: name})
         .then(artists => {
           update(() => {
             this.artist_options = artists.map(artist => {
