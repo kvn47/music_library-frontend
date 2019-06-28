@@ -69,7 +69,7 @@ const API = {
 }
 
 the_axios.interceptors.response.use(response => {
-  return response.data.data
+  return response.data
 }, error => {
   return Promise.reject(handle_error(error))
 })

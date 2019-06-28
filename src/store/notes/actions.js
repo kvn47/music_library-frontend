@@ -15,12 +15,12 @@ export function fetch_note ({ commit }, id) {
 
 export function create_note ({ commit }, note) {
   // return API.create(resource, {note}).then(note => commit('add_note', note))
-  return the_axios.post(resource, {note}).then(note => commit('add_note', build_note(note)))
+  return the_axios.post(resource, note).then(note => commit('add_note', build_note(note)))
 }
 
 export function update_note ({ commit }, note) {
   // return API.update(resource, note).then(note => commit('replace_note', note))
-  return the_axios.put(`${resource}/${note.id}`, {note}).then(note => commit('replace_note', build_note(note)))
+  return the_axios.put(`${resource}/${note.id}`, note).then(note => commit('replace_note', build_note(note)))
 }
 
 export function advance_note ({commit, state}, note) {
