@@ -96,7 +96,7 @@ module.exports = function (ctx) {
 
     build: {
       env: ctx.prod ? {
-        API: JSON.stringify('https://music-library.gigalixirapp.com')
+        API: JSON.stringify('https://muz-lib.herokuapp.com')
       } : {
         API: JSON.stringify('http://localhost:9000')
       },
