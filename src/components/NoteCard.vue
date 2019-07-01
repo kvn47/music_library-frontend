@@ -47,7 +47,6 @@ export default {
         'Youtube Music': 'https://music.youtube.com/search?q=',
         'Youtube': 'https://www.youtube.com/results?search_query=',
         'Google': 'https://www.google.com/search?q=',
-        'Google Music': 'https://play.google.com/music/listen#/sr/',
         'Google Play': 'https://play.google.com/store/search?c=music&q=',
         'RuTracker': 'https://rutracker.org/forum/tracker.php?nm=',
         'RuTor': 'http://open-ru.top/search//0/2/000/0/',
