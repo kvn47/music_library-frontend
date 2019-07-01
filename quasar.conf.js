@@ -104,8 +104,8 @@ module.exports = function (ctx) {
       },
 
       scopeHoisting: true,
-      vueRouterMode: 'history',
-      // vueRouterMode: 'hash',
+      // vueRouterMode: 'history',
+      vueRouterMode: 'hash',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,

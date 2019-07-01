@@ -1,6 +1,6 @@
 {
   "name": "music_library",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Music Library",
   "productName": "Music Library",
   "cordovaId": "org.cordova.quasar.music_library",
@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "quasar dev -p 8000 -m pwa",
     "dev:android": "quasar dev -m cordova -T android",
-    "build:pwa": "quasar build -m pwa",
+    "build:pwa": "quasar build -m pwa -P",
     "build:android": "quasar build -m cordova -T android",
     "test": "echo \"No test specified\" && exit 0"
   },
