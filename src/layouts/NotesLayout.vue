@@ -109,7 +109,6 @@
         this.$q.dialog({
           component: NoteForm,
           root: this.$root,
-          note: {kind: this.current_kind || 'listen'}
         }).onOk(() => {
           console.log('New note OK')
         })

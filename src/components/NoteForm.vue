@@ -94,7 +94,12 @@ export default {
   props: {
     note: {
       type: Object,
-      default () { return {kind: 'listen', release_date: new Date()} }
+      default () {
+        return {
+          kind: this.$route.params.kind || 'listen',
+          release_date: new Date()
+        }
+      }
     }
   },
 
@@ -156,7 +161,7 @@ export default {
     // },
 
     set_release_date (value) {
-      this.note.release_date = new Date(value)
+      this.note.release_date = new Date(value.replace(/\//g, '-'))
       this.$refs.date_picker_popup.hide()
     },
 
