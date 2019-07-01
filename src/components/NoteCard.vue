@@ -8,7 +8,6 @@
       <q-btn-dropdown icon="fas fa-search" color="info" auto-close flat>
         <q-list>
           <template v-for="source in Object.keys(search_sources)">
-<!--            <q-item @click="search_album(source)" clickable v-close-popup :key="source">-->
             <q-item @click="search_album(source)" clickable :key="source">
               <q-item-section>
                 <q-item-label>{{ source }}</q-item-label>
