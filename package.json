@@ -1,6 +1,6 @@
 {
   "name": "music_library",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Music Library",
   "productName": "Music Library",
   "cordovaId": "org.cordova.quasar.music_library",
