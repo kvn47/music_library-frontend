@@ -87,11 +87,15 @@
         return this.$store.state.notes.note_kinds
       },
 
+      current_kind () {
+        return this.$route.params.kind
+      },
+
       current_kind_color () {
-        if (this.$route.params.kind === undefined) {
+        if (this.current_kind === undefined) {
           return 'accent'
         } else {
-          return this.note_kinds[this.$route.params.kind].color
+          return this.note_kinds[this.current_kind].color
         }
       }
     },
@@ -104,7 +108,8 @@
       new_note () {
         this.$q.dialog({
           component: NoteForm,
-          root: this.$root
+          root: this.$root,
+          note: {kind: this.current_kind || 'listen'}
         }).onOk(() => {
           console.log('New note OK')
         })

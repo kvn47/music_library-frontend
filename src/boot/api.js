@@ -9,7 +9,7 @@ const the_axios = axios.create({
 })
 
 const handle_error = (error) => {
-  const req = `${error.config.method} ${error.config.url.replace(error.config.baseURL, '')}`
+  const req = `${error.config.method} ${error.config.url}`
   let error_message = ''
   let error_details = ''
 
@@ -17,7 +17,7 @@ const handle_error = (error) => {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
     error_message = `[API] ${req} => ${error.response.status} (${error.response.statusText})`
-    error_details = error.response.data.error
+    error_details = error.response.data.error || error.response.data
   } else if (error.request) {
     // The request was made but no response was received
     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -32,7 +32,7 @@ const handle_error = (error) => {
   }
 
   Notify.create({
-    message: `${error_message}\n\r${error_details}`,
+    message: `${error_message}. \n\r${error_details}`,
     color: 'negative',
     textColor: 'white',
     timeout: 0,

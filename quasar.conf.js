@@ -95,6 +95,8 @@ module.exports = function (ctx) {
     supportIE: false,
 
     build: {
+      distDir: '../backend/public',
+
       env: ctx.prod ? {
         API: JSON.stringify('')
       } : {
@@ -102,8 +104,8 @@ module.exports = function (ctx) {
       },
 
       scopeHoisting: true,
-      // vueRouterMode: 'history',
-      vueRouterMode: 'hash',
+      vueRouterMode: 'history',
+      // vueRouterMode: 'hash',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
@@ -128,12 +130,6 @@ module.exports = function (ctx) {
       // https: true,
       port: 8000,
       open: false,
-
-      // proxy: {
-      //   '/api': {
-      //     target: 'https://localhost:9000'
-      //   }
-      // }
     },
 
     // animations: 'all', // --- includes all animations
