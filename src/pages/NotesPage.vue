@@ -1,6 +1,6 @@
 <template>
-  <q-page padding>
-    <q-list>
+  <q-page class="q-pb-xl" padding>
+    <q-list class="q-mb-xl">
       <q-expansion-item
         v-for="note in notes"
         :key="note.id"
@@ -13,11 +13,21 @@
         <note-card :note="note"/>
       </q-expansion-item>
     </q-list>
+
+    <q-page-sticky :offset="[18, 18]">
+      <q-btn
+        @click="new_note"
+        icon="fas fa-plus"
+        color="primary"
+        fab
+      />
+    </q-page-sticky>
   </q-page>
 </template>
 
 <script>
   import NoteCard from 'components/NoteCard'
+  import NoteForm from 'components/NoteForm'
   import { note_label } from 'lib/note'
 
   export default {
@@ -42,6 +52,15 @@
     methods: {
       fetch_notes () {
         this.$store.dispatch('fetch_notes', {kind: this.kind})
+      },
+
+      new_note () {
+        this.$q.dialog({
+          component: NoteForm,
+          root: this.$root,
+        }).onOk(() => {
+          console.log('New note OK')
+        })
       },
 
       label (note) { return note_label(note) },

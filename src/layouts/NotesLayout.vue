@@ -27,13 +27,6 @@
 <!--          round-->
 <!--          dense-->
 <!--        />-->
-        <q-btn
-          @click="new_note"
-          icon="fas fa-plus"
-          flat
-          round
-          dense
-        />
       </q-toolbar>
 
 <!--      <q-input-->
@@ -68,7 +61,6 @@
 </template>
 
 <script>
-  import NoteForm from 'components/NoteForm'
   import HomeButton from 'components/HomeButton'
 
   export default {
@@ -97,21 +89,6 @@
         } else {
           return this.note_kinds[this.current_kind].color
         }
-      }
-    },
-
-    methods: {
-      // search () {
-      //   this.searching = !this.searching
-      // },
-
-      new_note () {
-        this.$q.dialog({
-          component: NoteForm,
-          root: this.$root,
-        }).onOk(() => {
-          console.log('New note OK')
-        })
       }
     }
   }

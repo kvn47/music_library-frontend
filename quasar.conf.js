@@ -4,6 +4,8 @@ const path = require('path');
 
 module.exports = function (ctx) {
   return {
+    preFetch: true,
+
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
@@ -85,7 +87,8 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify',
-        'Dialog'
+        'Dialog',
+        'LoadingBar'
       ],
 
       // iconSet: 'ionicons-v4'

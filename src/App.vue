@@ -6,7 +6,11 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+
+  preFetch ({store}) {
+    store.dispatch('fetch_settings')
+  }
 }
 </script>
 

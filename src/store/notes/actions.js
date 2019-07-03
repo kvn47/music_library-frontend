@@ -3,9 +3,9 @@ import { the_axios } from 'boot/api'
 
 const resource = 'notes'
 
-export const fetch_notes = ({ commit }, params) => {
+export const fetch_notes = ({ commit }, {kind}) => {
   // return API.query(resource, params).then(notes => commit('set_notes', notes))
-  return the_axios.get(resource, {params}).then(notes => commit('set_notes', build_notes(notes)))
+  return the_axios.get(`${resource}/${kind || ''}`).then(notes => commit('set_notes', build_notes(notes)))
 }
 
 export function fetch_note ({ commit }, id) {
