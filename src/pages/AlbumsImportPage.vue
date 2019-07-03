@@ -168,7 +168,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import {mapState} from 'vuex'
 import {fetch_subdirectories} from 'lib/file_system'
 import AlbumForm from 'components/AlbumForm'
 
@@ -202,8 +202,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(['prepare_albums_import', 'perform_albums_import']),
-
     on_sources_load ({node, key, done, fail}) {
       fetch_subdirectories(node.full_path)
         .then(subdirectories => {
@@ -246,7 +244,7 @@ export default {
 
     prepare () {
       this.processing = true
-      this.prepare_albums_import(this.source)
+      this.$api.query('collect_info', {path: this.source})
         .then(import_sources => {
           import_sources.forEach(import_source => {
             import_source.albums.forEach(album => {
@@ -267,7 +265,7 @@ export default {
     perform () {
       this.processing = true
 
-      this.perform_albums_import({path: this.source, import_sources: this.import_sources})
+      this.$api.post('import', {path: this.source, import_sources: this.import_sources})
         .then(result => {
           console.log(result)
           this.step_forward()
