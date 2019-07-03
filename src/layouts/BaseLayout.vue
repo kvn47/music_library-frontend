@@ -36,6 +36,8 @@
         return {
           'settings': 'Settings',
           'import': 'Import',
+          'export_lists': 'Export Lists',
+          'tracklists': 'Tracklists',
           'organizer': 'Organizer'
         }[this.$route.name]
       },

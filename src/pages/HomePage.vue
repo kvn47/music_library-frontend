@@ -1,15 +1,5 @@
 <template>
   <q-page class="flex flex-center" padding>
-<!--    <q-btn-->
-<!--      :to="{name: 'library'}"-->
-<!--      icon="fas fa-music"-->
-<!--      label="Library"-->
-<!--      color="primary"-->
-<!--      size="xl"-->
-<!--      class="full-width"-->
-<!--      outline-->
-<!--    />-->
-
     <q-btn-group
       outline
       class="full-width"
@@ -34,15 +24,18 @@
       />
     </q-btn-group>
 
-<!--    <q-btn-->
-<!--      :to="{name: 'organizer'}"-->
-<!--      icon="fas fa-align-justify"-->
-<!--      label="Organizer"-->
-<!--      color="primary"-->
-<!--      size="xl"-->
-<!--      outline-->
-<!--      class="full-width"-->
-<!--    />-->
+    <q-btn
+      v-for="button in buttons"
+      :key="button['route']"
+      :to="{name: button['route']}"
+      :label="button['label']"
+      :icon="button['icon']"
+      color="primary"
+      size="xl"
+      class="full-width"
+      no-caps
+      outline
+    />
   </q-page>
 </template>
 
@@ -51,6 +44,19 @@ import NoteForm from 'components/NoteForm'
 
 export default {
   name: 'HomePage',
+
+  data () {
+    return {
+      buttons: [
+        {route: 'library', label: 'Library', icon: 'fas fa-music'},
+        // {route: 'tracklists', label: 'Tracklists', icon: 'fas fa-list-alt'},
+        {route: 'import', label: 'Import', icon: 'fas fa-download'},
+        {route: 'export_lists', label: 'Export Lists', icon: 'fas fa-file-export'},
+        {route: 'organizer', label: 'Organizer', icon: 'fas fa-compact-disc'},
+        {route: 'settings', label: 'Settings', icon: 'fas fa-cogs'},
+      ]
+    }
+  },
 
   methods: {
     new_note () {

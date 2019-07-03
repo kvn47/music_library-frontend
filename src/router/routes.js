@@ -1,7 +1,7 @@
 export default [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/BaseLayout.vue'),
     children: [
       {name: 'home', path: '', component: () => import('pages/HomePage.vue')},
       {name: 'settings', path: 'settings', component: () => import('pages/SettingsPage.vue')},
@@ -14,13 +14,13 @@ export default [
     ]
   },
 
-  // {
-  //   path: '/library',
-  //   component: () => import('layouts/LibraryLayout.vue'),
-  //   children: [
-  //     {name: 'library', path: '', component: () => import('pages/LibraryPage.vue')}
-  //   ]
-  // },
+  {
+    path: '/library',
+    component: () => import('layouts/LibraryLayout.vue'),
+    children: [
+      {name: 'library', path: '', component: () => import('pages/LibraryPage.vue')}
+    ]
+  },
 
   {
     path: '/notes',
