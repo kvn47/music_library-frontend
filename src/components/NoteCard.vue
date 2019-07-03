@@ -48,7 +48,7 @@ export default {
         'Google': 'https://www.google.com/search?q=',
         'Google Play': 'https://play.google.com/store/search?c=music&q=',
         'RuTracker': 'https://rutracker.org/forum/tracker.php?nm=',
-        'RuTor': 'http://open-ru.top/search//0/2/000/0/',
+        'RuTor': 'http://rutor.info/search//0/2/000/0/',
         'Yandex': 'https://yandex.ru/search/?text='
       }
     }
