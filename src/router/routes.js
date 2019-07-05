@@ -6,7 +6,7 @@ export default [
       {name: 'home', path: '', component: () => import('pages/HomePage.vue')},
       {name: 'settings', path: 'settings', component: () => import('pages/SettingsPage.vue')},
       {name: 'artists', path: 'artists', component: () => import('pages/ArtistsPage.vue')},
-      {name: 'import', path: 'import', component: () => import('pages/AlbumsImportPage.vue')},
+      {name: 'import', path: 'import', component: () => import('pages/MusicImportPage.vue')},
       {name: 'export_lists', path: 'export_lists', component: () => import('pages/ExportListsPage.vue')},
       {name: 'tracklists', path: 'tracklists', component: () => import('pages/TracklistsPage.vue')},
       {name: 'tracklist', path: 'tracklists/:id', props: true, component: () => import('pages/TracklistPage.vue')},

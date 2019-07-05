@@ -1,34 +1,34 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 
 <q-card color="white" text-color="black" class="q-mb-sm">
   <q-card-section>
-    <q-input
-      v-model="album.album_artist"
-      label="Album Artist"
-    />
-
-    <template v-if="album.mb_artists">
-      <q-btn
-        :label="album.mb_artists"
-        @click="set_mb_artists"
-        icon="fas fa-check"
-        color="accent"
-        size="form"
-        no-caps
-        flat
-      />
-    </template>
-
     <q-select
-      v-model="album.artist"
+      label="Artist"
+      :value="album.artist"
       :options="artist_options"
+      @input="select_artist"
       @filter="search_artist"
+      :hint="`id: ${album.artist.id}, mb_id: ${album.artist.mb_id}`"
+      :loading="searching_artist"
+      option-label="name"
       input-debounce="1000"
       use-input
-      hide-selected
-      fill-input
     >
-      <template v-slot:append>
+      <template v-slot:option="scope">
+        <q-item
+          v-bind="scope.itemProps"
+          v-on="scope.itemEvents"
+        >
+          <q-item-section>
+            <q-item-label>{{ scope.opt.value }}</q-item-label>
+            <q-item-label overline>{{ scope.opt.label }}</q-item-label>
+            <q-item-label caption>{{ scope.opt.details }}</q-item-label>
+          </q-item-section>
+          <q-item-section side>{{ scope.opt.score }}</q-item-section>
+        </q-item>
+      </template>
+
+      <template v-slot:append="scope">
         <q-icon
           v-if="album.artist !== null"
           name="clear"
@@ -63,6 +63,23 @@
       >
         <q-icon name="fas fa-external-link-alt"/>
       </a>
+    </template>
+
+    <q-input
+      v-model="album.album_artist"
+      label="Album Artist"
+    />
+
+    <template v-if="album.mb_artists">
+      <q-btn
+        :label="album.mb_artists"
+        @click="set_mb_artists"
+        icon="fas fa-check"
+        color="accent"
+        size="form"
+        no-caps
+        flat
+      />
     </template>
 
     <q-input
@@ -114,18 +131,18 @@
     <q-select
       v-model="album.cover"
       :options="cover_options"
-      float-label="Cover"
+      label="Cover"
     />
   </q-card-section>
 
-  <q-expansion-item label="Tracks">
+  <q-expansion-item label="Tracks" switch-toggle-side>
     <q-list separator>
       <template v-for="(track, index) in album.tracks">
         <q-item :key="`track-${index}`">
-          <q-item-section><q-checkbox v-model="track.checked"/></q-item-section>
+          <q-item-section side><q-checkbox v-model="track.checked"/></q-item-section>
 
-          <q-item-label>
-            <q-item-label class="row gutter-xs" header>
+          <q-item-section>
+            <div class="row gutter-xs">
               <q-input
                 v-model="track.number"
                 type="number"
@@ -137,10 +154,10 @@
                 v-model="track.title"
                 class="col"
               />
-            </q-item-label>
+            </div>
 
             <template v-if="track.mb_title">
-              <q-item-label caption>
+              <div>
                 <q-btn
                   @click="set_mb_track_title(track)"
                   :label="track.mb_title"
@@ -153,12 +170,12 @@
                 <a :href="track.mb_url" target="_blank" class="q-ml-sm">
                   <q-icon name="fas fa-external-link-alt"/>
                 </a>
-              </q-item-label>
+              </div>
             </template>
-          </q-item-label>
+          </q-item-section>
 
           <q-item-section side right>
-            <q-btn flat color="negative" icon="fas fa-minus" @click="remove_track(track)"/>
+            <q-btn @click="remove_track(track)" icon="fas fa-minus" color="negative" flat />
           </q-item-section>
         </q-item>
       </template>
@@ -206,7 +223,10 @@ export default {
     },
     images: {
       type: Array,
-      required: false
+      required: false,
+      default () {
+        return []
+      }
     }
   },
 
@@ -214,8 +234,7 @@ export default {
     return {
       searching_work: false,
       searching_artist: false,
-      artist_options: [],
-      artist_mbid: null
+      artist_options: []
     }
   },
 
@@ -229,7 +248,7 @@ export default {
     find_work_info () {
       this.searching_work = true
 
-      this.$api.query('find_work_info', {title: this.album.title, artist: this.album.artist, artist_mbid: this.artist_mbid})
+      this.$api.query('find_work_info', {title: this.album.title, artist: this.album.artist, artist_mb_id: this.artist.mb_id})
         .then(work_info => {
           console.log(this.album)
           // this.album.mb_artists = work_info.artists
@@ -254,37 +273,64 @@ export default {
     },
 
     search_artist (name, update, abort) {
-      if (val.length < 2) {
-        abort()
-        return
+      if (name.length < 2) {
+        if (this.album.artist.name.length < 2) {
+          abort()
+          this.searching_artist = false
+          return
+        } else {
+          name = this.album.artist.name
+        }
       }
 
-      this.$api.query('search_artist', {name: name})
+      this.searching_artist = true
+
+      this.$api.query('artists', {name: name})
         .then(artists => {
-          update(() => {
-            this.artist_options = artists.map(artist => {
-              return {
-                value: artist.sort_name,
-                label: artist.name,
-                sublabel: `[${artist.life_span.begin} - ${artist.life_span.end}]. Country: ${artist.country}`,
-                stamp: artist.score,
-                mbid: artist.id
-              }
+          if (artists.length > 0) {
+            update(() => {
+              this.artist_options = artists.map(artist => {
+                return {
+                  value: artist.name,
+                  label: artist.name
+                }
+              })
             })
-          })
+          } else {
+            this.$api.query('mb_artists', {name: name})
+              .then(artists => {
+                update(() => {
+                  this.artist_options = artists.map(artist => {
+                    return {
+                      value: artist.name,
+                      label: artist.sort_name,
+                      details: `[${artist.life_span.begin} - ${artist.life_span.end}]. Country: ${artist.country}`,
+                      score: artist.score,
+                      mb_id: artist.id
+                    }
+                  })
+                })
+              })
+              .catch(() => abort())
+          }
         })
         .catch(() => abort())
+        .finally(() => { this.searching_artist = false })
+
     },
 
     select_artist (artist) {
-      this.artist_mbid = artist.mbid
-      this.album.artist = artist.label
+      this.album.artist.name = artist.label
+      this.album.artist.id = artist.id
+      this.album.artist.mb_id = artist.mb_id
       this.album.mb_composer = artist.label
-      this.album.mb_composer_url = `https://musicbrainz.org/artist/${artist.mbid}`
+      this.album.mb_composer_url = `https://musicbrainz.org/artist/${artist.mb_id}`
     },
 
     clear_artist () {
-      this.artist_mbid = null
+      this.album.artist.id = null
+      this.album.artist.name = null
+      this.album.artist.mb_id = null
       this.album.mb_composer = null
       this.album.mb_composer_url = null
     },

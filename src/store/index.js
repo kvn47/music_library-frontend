@@ -7,7 +7,6 @@ import library from './library'
 import notes from './notes'
 import tracklists from './tracklists'
 import export_lists from './export_lists'
-import albums_import from './albums_import'
 import artists from './artists'
 import albums from './albums'
 import tracks from './tracks'
@@ -50,7 +49,6 @@ export default new Vuex.Store({
     library,
     tracklists,
     export_lists,
-    albums_import,
     artists,
     albums,
     tracks
