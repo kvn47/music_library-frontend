@@ -292,7 +292,9 @@ export default {
               this.artist_options = artists.map(artist => {
                 return {
                   value: artist.name,
-                  label: artist.name
+                  label: artist.name,
+                  id: artist.id,
+                  mb_id: artist.mb_id
                 }
               })
             })

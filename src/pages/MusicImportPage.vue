@@ -49,7 +49,13 @@
         <q-stepper-navigation>
           <div class="float-right q-mb-lg">
             <q-btn label="Back" @click="step_back" flat class="on-left"/>
-            <q-btn label="Import" color="primary" @click="perform" :loading="importing"/>
+            <q-btn
+              @click="perform"
+              label="Import"
+              :disable="source_infos.length < 1"
+              :loading="importing"
+              color="primary"
+            />
           </div>
         </q-stepper-navigation>
       </q-step>
