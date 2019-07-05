@@ -77,7 +77,7 @@ export default {
   data: function(){
     return {
       step: 1,
-      source: '/Users/vova/Music/2004 - Vol.3 (The Subliminal Verses)',
+      source: '',
       source_error: null,
       source_infos: [],
       preparing: false,
