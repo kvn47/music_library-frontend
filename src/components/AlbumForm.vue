@@ -130,8 +130,9 @@
 
     <q-select
       v-model="album.cover"
-      :options="cover_options"
+      :options="images"
       label="Cover"
+      emit-value
     />
   </q-card-section>
 
@@ -238,11 +239,12 @@ export default {
     }
   },
 
-  computed: {
-    cover_options () {
-      return this.images.map(image => { return {label: image, value: image} })
-    }
-  },
+  // computed: {
+  //   cover_options () {
+  //     // return this.images.map(image => { return {label: image, value: image} })
+  //     return this.images
+  //   }
+  // },
 
   methods: {
     find_work_info () {

@@ -39,6 +39,7 @@
             <template v-for="(album, index) in source_info.albums">
               <album-form
                 :album="album"
+                :images="source_info.images"
                 @split-album="split_album(album, source_info)"
                 :key="`album-${index}`"
               />
@@ -77,7 +78,7 @@ export default {
   data: function(){
     return {
       step: 1,
-      source: '',
+      source: '/Users/vova/Music/Anathema - Internal Landscapes (Best of 2008-2018) (2018) [24bit Hi-Res]',
       source_error: null,
       source_infos: [],
       preparing: false,
