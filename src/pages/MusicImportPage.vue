@@ -78,7 +78,7 @@ export default {
   data: function(){
     return {
       step: 1,
-      source: '/Users/vova/Music/Anathema - Internal Landscapes (Best of 2008-2018) (2018) [24bit Hi-Res]',
+      source: '',
       source_error: null,
       source_infos: [],
       preparing: false,
