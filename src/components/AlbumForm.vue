@@ -50,8 +50,7 @@
       <q-btn
         @click="set_mb_composer"
         :label="album.mb_composer"
-        icon="fas fa-check"
-        color="accent"
+        color="secondary"
         size="form"
         no-caps
         flat
@@ -59,7 +58,7 @@
       <a
         :href="album.mb_composer_url"
         target="_blank"
-        class="q-ml-sm"
+        class="on-right"
       >
         <q-icon name="fas fa-external-link-alt"/>
       </a>
@@ -74,8 +73,7 @@
       <q-btn
         :label="album.mb_artists"
         @click="set_mb_artists"
-        icon="fas fa-check"
-        color="accent"
+        color="secondary"
         size="form"
         no-caps
         flat
@@ -91,8 +89,7 @@
       <q-btn
         @click="set_mb_title"
         :label="album.mb_title"
-        icon="fas fa-check"
-        color="accent"
+        color="secondary"
         size="form"
         no-caps
         flat
@@ -100,7 +97,7 @@
       <a
         :href="album.mb_url"
         target="_blank"
-        class="q-ml-sm"
+        class="on-right"
       >
         <q-icon name="fas fa-external-link-alt"/>
       </a>
@@ -120,8 +117,7 @@
       <q-btn
         :label="album.mb_date"
         @click="set_mb_year"
-        icon="fas fa-check"
-        color="accent"
+        color="secondary"
         size="form"
         no-caps
         flat
@@ -162,13 +158,16 @@
                 <q-btn
                   @click="set_mb_track_title(track)"
                   :label="track.mb_title"
-                  icon="fas fa-check"
-                  color="accent"
+                  color="secondary"
                   size="form"
                   no-caps
                   flat
                 />
-                <a :href="track.mb_url" target="_blank" class="q-ml-sm">
+                <a
+                  :href="track.mb_url"
+                  target="_blank"
+                  class="on-right"
+                >
                   <q-icon name="fas fa-external-link-alt"/>
                 </a>
               </div>
@@ -250,7 +249,7 @@ export default {
     find_work_info () {
       this.searching_work = true
 
-      this.$api.query('find_work_info', {title: this.album.title, artist: this.album.artist, artist_mb_id: this.artist.mb_id})
+      this.$api.query('work_info', {title: this.album.title, artist: this.album.artist.name, artist_mb_id: this.album.artist.mb_id})
         .then(work_info => {
           console.log(this.album)
           // this.album.mb_artists = work_info.artists
