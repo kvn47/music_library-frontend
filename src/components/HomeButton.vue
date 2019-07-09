@@ -1,7 +1,7 @@
 <template>
   <q-btn
     :to="{name: 'home'}"
-    icon="fas fa-arrow-left"
+    icon="fas fa-music"
     flat
   />
 </template>

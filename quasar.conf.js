@@ -29,6 +29,7 @@ module.exports = function (ctx) {
       // all: true, // --- includes everything; for dev only!
 
       components: [
+        'QAvatar',
         'QBreadcrumbs',
         'QBreadcrumbsEl',
         'QBtn',
@@ -49,6 +50,7 @@ module.exports = function (ctx) {
         'QFooter',
         'QHeader',
         'QIcon',
+        'QImg',
         'QInnerLoading',
         'QInput',
         'QItem',
@@ -61,6 +63,7 @@ module.exports = function (ctx) {
         'QPage',
         'QPageContainer',
         'QPageSticky',
+        'QParallax',
         'QPopupProxy',
         'QRouteTab',
         'QSelect',
@@ -108,8 +111,8 @@ module.exports = function (ctx) {
       },
 
       scopeHoisting: true,
-      // vueRouterMode: 'history',
-      vueRouterMode: 'hash',
+      vueRouterMode: 'history',
+      // vueRouterMode: 'hash',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
@@ -134,6 +137,11 @@ module.exports = function (ctx) {
       // https: true,
       port: 8000,
       open: false,
+      proxy: {
+        '/uploads': {
+          target: 'http://localhost:9000'
+        }
+      }
     },
 
     // animations: 'all', // --- includes all animations

@@ -8,7 +8,7 @@
       <q-toolbar>
         <q-toolbar-title>
           <home-button/>
-          {{ page_title }}
+          <span class="text-h6 capitalize">{{ page_title }}</span>
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
@@ -16,7 +16,6 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-
   </q-layout>
 </template>
 

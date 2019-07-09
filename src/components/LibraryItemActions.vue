@@ -1,6 +1,6 @@
 <template>
 <span>
-  <q-btn flat round dense @click="showing_menu = !showing_menu" icon="fas fa-ellipsis-v"/>
+  <q-btn @click.stop.prevent="showing_menu = !showing_menu" icon="fas fa-ellipsis-v" flat/>
   <span>
     <q-menu v-model="showing_menu">
       <q-list>
