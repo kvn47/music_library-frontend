@@ -15,11 +15,18 @@
       </q-card-actions>
       <q-separator/>
       <q-list separator>
-        <q-item v-for="track in tracks" :key="track.id" @click.native="select_track(track)" clickable>
+        <q-item
+          v-for="(track, index) in tracks"
+          :key="track.id"
+          @click.native="select_track(index)"
+          :active="selected_tracks.has(index)"
+          active-class="bg-teal-1"
+          clickable
+        >
           <q-item-section side>{{ track.number }}</q-item-section>
           <q-item-section>
-            <q-item-label header class="text-black">{{ track.title }}</q-item-label>
-            <q-item-label overline>length: {{ track.length }}, size: {{ track.size }}</q-item-label>
+            <q-item-label class="text-black">{{ track.title }}</q-item-label>
+            <q-item-label class="text-grey-7" overline>length: {{ track.length }}, size: {{ track.size }}</q-item-label>
           </q-item-section>
           <q-item-section side right>
             <library-item-actions
@@ -52,6 +59,7 @@ export default {
       artist_id: null,
       artist_name: null,
       tracks: [],
+      selected_tracks: new Set()
     }
   },
 
@@ -72,7 +80,13 @@ export default {
 
     edit () {},
 
-    select_track () {},
+    select_track (index) {
+      if (this.selected_tracks.has(index)) {
+        this.selected_tracks.delete(index)
+      } else {
+        this.selected_tracks.add(index)
+      }
+    },
 
     add_to_current_export_list (params) {
       if (this.current_export_list.id) {
