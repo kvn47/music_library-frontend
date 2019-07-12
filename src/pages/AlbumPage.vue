@@ -5,13 +5,39 @@
         <q-img v-if="cover_url" :src="cover_url" style="max-width: 256px;" class=""/>
       </div>
       <q-card-section>
-        <div class="text-h6">{{ title }}</div>
+        <div class="text-h6 cursor-pointer">
+          {{ title }}
+          <q-popup-edit v-model="title" @save="update('title', title)" buttons>
+            <q-input v-model="title" dense autofocus/>
+          </q-popup-edit>
+        </div>
+
         <div class="text-subtitle1">
           <q-btn :to="{name: 'artist', params: {id: artist_id}}" :label="artist_name" flat dense no-caps/>
         </div>
       </q-card-section>
+
+      <q-card-section>
+        <q-btn
+          :href="`https://musicbrainz.org/work/${mb_id}`"
+          label="MusicBrainz"
+          icon-right="fas fa-external-link-alt"
+          type="a"
+          target="_blank"
+          color="grey-8"
+          size="sm"
+          no-caps
+          dense
+          flat
+        />
+        <q-btn icon="edit" size="sm" color="grey-7" class="on-right" flat dense>
+          <q-popup-edit v-model="mb_id" @save="update('mb_id', mb_id)" buttons>
+            <q-input v-model="mb_id" dense autofocus/>
+          </q-popup-edit>
+        </q-btn>
+      </q-card-section>
       <q-card-actions align="around">
-        <q-btn @click="edit" label="Edit" flat></q-btn>
+        <q-btn label="Export selected" flat></q-btn>
       </q-card-actions>
       <q-separator/>
       <q-list separator>
@@ -78,7 +104,10 @@ export default {
   methods: {
     ...mapActions(['add_tracks_to_export_list', 'add_tracks_to_tracklist']),
 
-    edit () {},
+    update (attr, value) {
+      const params = Object.fromEntries([[attr, value]])
+      this.$api.update('albums', this.id, params)
+    },
 
     select_track (index) {
       if (this.selected_tracks.has(index)) {

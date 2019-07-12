@@ -64,6 +64,7 @@ module.exports = function (ctx) {
         'QPageContainer',
         'QPageSticky',
         'QParallax',
+        'QPopupEdit',
         'QPopupProxy',
         'QRouteTab',
         'QSelect',

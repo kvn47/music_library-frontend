@@ -91,15 +91,4 @@
 </script>
 
 <style>
-  .library-item-main {
-    line-height: 38px;
-  }
-
-  .clickable {
-    cursor: pointer;
-  }
-
-  .clickable:hover {
-    background: rgba(189,189,189,0.5);
-  }
 </style>

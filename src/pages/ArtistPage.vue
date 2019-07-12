@@ -5,11 +5,32 @@
         <q-img v-if="image_url" :src="image_url" style="max-width: 256px;"/>
       </div>
       <q-card-section>
-        <div class="text-h6">{{ name }}</div>
+        <div class="text-h6 cursor-pointer">
+          {{ name }}
+          <q-popup-edit v-model="name" @save="update('name', name)" buttons>
+            <q-input v-model="name" dense autofocus/>
+          </q-popup-edit>
+        </div>
+
+        <q-btn
+          :href="`https://musicbrainz.org/artist/${mb_id}`"
+          label="MusicBrainz"
+          icon-right="fas fa-external-link-alt"
+          type="a"
+          target="_blank"
+          color="grey-8"
+          size="sm"
+          no-caps
+          dense
+          flat
+        />
+        <q-btn icon="edit" size="sm" color="grey-7" class="on-right" flat dense>
+          <q-popup-edit v-model="mb_id" @save="update('mb_id', mb_id)" buttons>
+            <q-input v-model="mb_id" dense autofocus/>
+          </q-popup-edit>
+        </q-btn>
       </q-card-section>
-      <q-card-actions align="around">
-        <q-btn @click="edit" label="Edit" flat/>
-      </q-card-actions>
+      <q-card-actions align="around"></q-card-actions>
       <q-separator/>
       <q-list separator>
         <q-item v-for="album in albums" :key="album.id" :to="{name: 'album', params: {id: album.id}}" clickable>
@@ -65,8 +86,6 @@ export default {
   methods: {
     ...mapActions(['add_tracks_to_export_list', 'add_tracks_to_tracklist']),
 
-    edit () {},
-
     add_to_current_export_list (params) {
       if (this.current_export_list.id) {
         this.add_tracks_to_export_list(params)
@@ -83,6 +102,11 @@ export default {
 
     add_album_to_tracklist (album, tracklist) {
       this.add_tracks_to_tracklist({tracklist_id: tracklist.id, album_id: album.id})
+    },
+
+    update (attr, value) {
+      const params = Object.fromEntries([[attr, value]])
+      this.$api.update('artists', this.id, params)
     }
   },
 

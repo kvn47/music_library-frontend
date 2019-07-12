@@ -59,8 +59,8 @@ const API = {
     return the_axios.post(resource, data)
   },
 
-  update (resource, data) {
-    return the_axios.put(`${resource}/${data.id}`, data)
+  update (resource, id, params) {
+    return the_axios.put(`${resource}/${id}`, params)
   },
 
   delete (resource, id) {
