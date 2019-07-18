@@ -8,11 +8,11 @@
       :options="artist_options"
       @input="select_artist"
       @filter="search_artist"
-      :hint="`id: ${album.artist.id}, mb_id: ${album.artist.mb_id}`"
       :loading="searching_artist"
       option-label="name"
       input-debounce="1000"
       use-input
+      bottom-slots
     >
       <template v-slot:option="scope">
         <q-item
@@ -44,30 +44,47 @@
           </q-item-section>
         </q-item>
       </template>
-    </q-select>
 
-    <template v-if="album.mb_composer">
-      <q-btn
-        @click="set_mb_composer"
-        :label="album.mb_composer"
-        color="secondary"
-        size="form"
-        no-caps
-        flat
-      />
-      <a
-        :href="album.mb_composer_url"
-        target="_blank"
-        class="on-right"
-      >
-        <q-icon name="fas fa-external-link-alt"/>
-      </a>
-    </template>
+      <template v-slot:hint>
+        <div>
+          {{ `id: ${album.artist.id}, mb_id: ${album.artist.mb_id}` }}
+          <template v-if="album.mb_composer">
+            <q-btn
+              @click="set_mb_composer"
+              :label="album.mb_composer"
+              color="secondary"
+              size="form"
+              no-caps
+              flat
+            />
+            <a
+              :href="album.mb_composer_url"
+              target="_blank"
+              class="on-right"
+            >
+              <q-icon name="fas fa-external-link-alt"/>
+            </a>
+          </template>
+        </div>
+      </template>
+
+      <template v-slot:before>
+        <q-btn icon="fas fa-edit" color="grey-7" flat>
+          <q-popup-edit v-model="album.artist.name" buttons>
+            <q-input v-model="album.artist.name" dense autofocus/>
+          </q-popup-edit>
+        </q-btn>
+      </template>
+    </q-select>
 
     <q-input
       v-model="album.album_artist"
       label="Album Artist"
-    />
+    >
+      <template v-slot:before>
+        <q-btn @click="fill_album_artist" icon="far fa-hand-point-right" color="grey-7" flat/>
+      </template>
+    </q-input>
 
     <template v-if="album.mb_artists">
       <q-btn
@@ -336,6 +353,10 @@ export default {
       this.album.artist.mb_id = null
       this.album.mb_composer = null
       this.album.mb_composer_url = null
+    },
+
+    fill_album_artist () {
+      this.album.album_artist = this.album.artist.name
     },
 
     set_mb_artists () {

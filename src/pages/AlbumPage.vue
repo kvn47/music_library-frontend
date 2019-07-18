@@ -30,7 +30,7 @@
           dense
           flat
         />
-        <q-btn icon="edit" size="sm" color="grey-7" class="on-right" flat dense>
+        <q-btn icon="fas fa-edit" size="sm" color="grey-7" class="on-right" flat dense>
           <q-popup-edit v-model="mb_id" @save="update('mb_id', mb_id)" buttons>
             <q-input v-model="mb_id" dense autofocus/>
           </q-popup-edit>

@@ -19,7 +19,8 @@ export default new Vuex.Store({
     success_message(state, message) {
       Notify.create({
         message: message,
-        type: 'positive',
+        color: 'positive',
+        textColor: 'white',
         timeout: 3000,
         actions: [{icon: 'fas fa-times'}]
       })
@@ -28,7 +29,8 @@ export default new Vuex.Store({
     error_message (state, message) {
       Notify.create({
         message: message,
-        type: 'negative',
+        color: 'negative',
+        textColor: 'white',
         timeout: 0,
         actions: [{icon: 'fas fa-times'}]
       })

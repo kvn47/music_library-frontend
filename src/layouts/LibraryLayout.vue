@@ -9,7 +9,13 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="is_drawer_open" side="right" content-class="bg-grey-2" overlay>
+    <q-drawer
+      v-model="is_drawer_open"
+      side="right"
+      content-class="bg-grey-2"
+      overlay
+      elevated
+    >
       <current-export-list/>
     </q-drawer>
 
@@ -20,17 +26,20 @@
     <q-footer elevated reveal>
       <q-toolbar>
         <q-btn flat icon="fas fa-caret-up">
-          <q-menu>
+          <q-menu auto-close>
             <q-list>
-              <q-item @click.native="unset_export_list" v-close-popup>-</q-item>
+              <q-item @click.native="unset_export_list" v-close-popup clickable>-</q-item>
               <q-item
                 v-for="export_list in export_lists"
                 :key="export_list.id"
                 @click.native="select_export_list(export_list)"
+                clickable
                 v-close-popup
               >
-                <q-item-label header>{{ export_list.name }}</q-item-label>
-                <q-item-label caption>{{ `${export_list.size} / ${export_list.capacity}` }}</q-item-label>
+                <q-item-section>
+                  <q-item-label>{{ export_list.name }}</q-item-label>
+                  <q-item-label caption>{{ `${export_list.size} / ${export_list.capacity}` }}</q-item-label>
+                </q-item-section>
               </q-item>
             </q-list>
           </q-menu>
@@ -62,6 +71,11 @@
       return {
         is_drawer_open: this.$q.platform.is.desktop
       }
+    },
+
+    created () {
+      this.$store.dispatch('fetch_export_lists')
+      this.$store.dispatch('fetch_tracklists')
     },
 
     computed: {

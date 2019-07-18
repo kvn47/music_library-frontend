@@ -1,15 +1,9 @@
 <template>
   <q-card flat>
     <q-card-section>
-      <q-card-section>
-        {{ export_list.name }}
-        <span slot="subtitle">{{ export_list.destination_path }}</span>
-        <span slot="right">{{ export_list.capacity }}</span>
-      </q-card-section>
-      <dl class="horizontal">
-        <dt>Size</dt>
-        <dd>{{ export_list.size }}</dd>
-      </dl>
+      <div class="text-h6">{{ export_list.name }}</div>
+      <div class="text-subtitle1">{{ export_list.size }} / {{ export_list.capacity }}</div>
+      <div class="text-subtitle2">{{ export_list.destination_path }}</div>
     </q-card-section>
 
     <q-card-actions align="around">
@@ -25,10 +19,10 @@
 
     <q-list>
       <q-item v-for="track in export_list.tracks" :key="track.id">
-        <q-item-label>
-          <q-item-label header>{{ track.title }}</q-item-label>
+        <q-item-section>
+          <q-item-label>{{ track.title }}</q-item-label>
           <q-item-label caption>{{ track.artist_name }}</q-item-label>
-        </q-item-label>
+        </q-item-section>
         <q-item-section side right>
           <q-btn icon="fas fa-minus" color="negative" flat dense @click="remove_track(track)"/>
           <q-item-label stamp>{{ track.size }}</q-item-label>

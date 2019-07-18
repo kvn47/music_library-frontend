@@ -137,7 +137,7 @@ export default {
         }
       })
 
-      const new_album = Object.assign({}, album, {tracks: checked_tracks})
+      const new_album = JSON.parse(JSON.stringify(Object.assign({}, album, {tracks: checked_tracks})))
       source_info.albums.push(new_album)
     },
 

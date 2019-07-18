@@ -1,13 +1,20 @@
 <template>
   <q-page padding>
     <q-list>
-      <q-item v-for="export_list in export_lists" :key="export_list.id">
-        <q-item-label>{{ export_list.name }}</q-item-label>
+      <q-item
+        v-for="export_list in export_lists"
+        :key="export_list.id"
+        :to="{name: 'export_list', params: {id: export_list.id}}"
+        clickable
+      >
+        <q-item-section>
+          <q-item-label>{{ export_list.name }}</q-item-label>
+        </q-item-section>
         <q-item-section side right>
-          <q-btn flat round dense icon="fas fa-ellipsis-v">
-            <q-popover>
+          <q-btn icon="fas fa-ellipsis-v" flat round dense>
+            <q-menu>
               <q-list>
-                <q-item v-close-popup>
+                <q-item clickable v-close-popup>
                   <q-item-label @click.native="edit_export_list(export_list)">Edit</q-item-label>
                 </q-item>
                 <q-separator/>
@@ -15,7 +22,7 @@
                   <q-item-label @click.native="delete_export_list(export_list)">Delete</q-item-label>
                 </q-item>
               </q-list>
-            </q-popover>
+            </q-menu>
           </q-btn>
         </q-item-section>
       </q-item>

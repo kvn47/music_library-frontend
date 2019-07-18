@@ -45,6 +45,7 @@
             <library-item-actions
               :item="album"
               @add_item_to_current_export_list="add_album_to_current_export_list"
+              @add_item_to_export_list="add_album_to_export_list"
               @add_item_to_tracklist="add_album_to_tracklist"
             />
           </q-item-section>
@@ -86,19 +87,11 @@ export default {
   methods: {
     ...mapActions(['add_tracks_to_export_list', 'add_tracks_to_tracklist']),
 
-    add_to_current_export_list (params) {
-      if (this.current_export_list.id) {
-        this.add_tracks_to_export_list(params)
-      } else {
-        Notify.create({
-          message: 'Export List not selected!',
-          type: 'warning',
-          timeout: 3000
-        })
-      }
-    },
+    add_album_to_current_export_list (album) { this.add_tracks_to_export_list({album_id: album.id}) },
 
-    add_album_to_current_export_list (album) { this.add_to_current_export_list({album_id: album.id}) },
+    add_album_to_export_list (album, export_list) {
+      this.add_tracks_to_export_list({export_list_id: export_list.id, album_id: album.id})
+    },
 
     add_album_to_tracklist (album, tracklist) {
       this.add_tracks_to_tracklist({tracklist_id: tracklist.id, album_id: album.id})

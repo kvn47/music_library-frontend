@@ -27,15 +27,22 @@ export const delete_export_list = ({commit}, id) => {
 }
 
 export const add_tracks_to_export_list = ({state, commit}, data) => {
-  return the_axios.post(`export_lists/${state.current.id}/add`, data)
-    .then(export_list => {
-      commit('set_current_export_list', export_list)
-      commit('success_message', `Tracks added to Export List "${export_list.name}"`)
-    })
+  const export_list_id = data.export_list_id || state.current.id
+
+  if (export_list_id) {
+    return the_axios.post(`export_lists/${export_list_id}/add_tracks`, data)
+      .then(export_list => {
+        commit('set_current_export_list', export_list)
+        commit('success_message', `Tracks added to Export List "${export_list.name}"`)
+      })
+  } else {
+    commit('error_message', 'Export list undefined')
+  }
+
 }
 
 export const remove_track_from_export_list = ({state, commit}, track_id) => {
-  return the_axios.patch(`export_lists/${state.current.id}/remove`, {track_id: track_id})
+  return the_axios.patch(`export_lists/${state.current.id}/remove_track`, {track_id: track_id})
     .then(export_list => commit('set_current_export_list', export_list))
 }
 

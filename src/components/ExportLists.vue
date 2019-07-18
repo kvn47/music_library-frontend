@@ -22,10 +22,10 @@
       <q-separator/>
       <q-list>
         <q-item v-for="track in current_export_list.tracks" :key="track.id">
-          <q-item-label>
+          <q-item-section>
             <q-item-label header>{{ track.title }}</q-item-label>
             <q-item-label caption>{{ track.artist }}</q-item-label>
-          </q-item-label>
+          </q-item-section>
           <q-item-section side right>
             <q-btn icon="fas fa-minus" color="negative" flat dense round @click="remove_track(track)"/>
           </q-item-section>
@@ -36,7 +36,9 @@
 
   <q-list v-else inset-delimiter>
     <q-item v-for="export_list in export_lists" :key="export_list.id" @click.native="select_export_list(export_list)">
-      <q-item-label>{{ export_list.name }}</q-item-label>
+      <q-item-section>
+        <q-item-label>{{ export_list.name }}</q-item-label>
+      </q-item-section>
     </q-item>
   </q-list>
 </template>

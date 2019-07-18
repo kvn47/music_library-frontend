@@ -7,6 +7,7 @@ export default [
       {name: 'settings', path: 'settings', component: () => import('pages/SettingsPage.vue')},
       {name: 'import', path: 'import', component: () => import('pages/MusicImportPage.vue')},
       {name: 'export_lists', path: 'export_lists', component: () => import('pages/ExportListsPage.vue')},
+      {name: 'export_list', path: 'export_lists/:id', props: true, component: () => import('pages/ExportListPage.vue')},
       {name: 'tracklists', path: 'tracklists', component: () => import('pages/TracklistsPage.vue')},
       {name: 'tracklist', path: 'tracklists/:id', props: true, component: () => import('pages/TracklistPage.vue')},
       {name: 'organizer', path: 'organizer', component: () => import('pages/AlbumOrganizerPage.vue')}
