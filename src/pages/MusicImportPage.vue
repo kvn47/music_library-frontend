@@ -69,6 +69,7 @@
 import {mapState} from 'vuex'
 import {fetch_subdirectories} from 'lib/file_system'
 import AlbumForm from 'components/AlbumForm'
+import ActionCable from 'actioncable'
 
 export default {
   name: 'MusicImportPage',
@@ -78,7 +79,7 @@ export default {
   data: function(){
     return {
       step: 1,
-      source: '',
+      source: '/Users/vova/Music/Epica - Retrospect CD/CD1',
       source_error: null,
       source_infos: [],
       preparing: false,
@@ -165,13 +166,22 @@ export default {
     perform () {
       this.importing = true
 
+      // TODO
+      // const cable = ActionCable.createConsumer('ws://localhost:9000/cable')
+      // const subscription = cable.subscriptions.create('logs', {
+      //   received (data) {
+      //     console.log(`[ActionCable] ${data}`)
+      //   }
+      // })
+
       this.$api.post('import', {path: this.source, source_infos: this.source_infos})
         .then(result => {
-          console.log(result)
+          this.$store.commit('success_message', result.result)
           this.step_forward()
           this.source_infos = []
         })
         .finally(() => {
+          // subscription.unsubscribe()
           this.importing = false
         })
     }
