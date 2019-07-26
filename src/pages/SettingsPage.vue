@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <q-page padding>
     <dl>
       <dt>Library path</dt>
@@ -32,9 +32,11 @@ export default {
   methods: {
     rescan_library () {
       this.scanning_library = true
-      this.$store.dispatch('rescan_library').then(() => {
-        this.scanning_library = false
-      })
+
+      this.$api.post('library/rescan')
+        .finally(() => {
+          this.scanning_library = false
+        })
     }
   }
 }

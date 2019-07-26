@@ -9,7 +9,8 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
-      'api'
+      'api',
+      'cable'
     ],
 
     css: [
@@ -30,6 +31,7 @@ module.exports = function (ctx) {
 
       components: [
         'QAvatar',
+        'QBanner',
         'QBreadcrumbs',
         'QBreadcrumbsEl',
         'QBtn',
@@ -40,6 +42,7 @@ module.exports = function (ctx) {
         'QCardSection',
         'QCardActions',
         'QCheckbox',
+        'QCircularProgress',
         'QDate',
         'QDialog',
         'QDrawer',
@@ -67,6 +70,7 @@ module.exports = function (ctx) {
         'QPopupEdit',
         'QPopupProxy',
         'QRouteTab',
+        'QScrollArea',
         'QSelect',
         'QSeparator',
         'QSpace',
@@ -106,9 +110,11 @@ module.exports = function (ctx) {
       distDir: '../backend/public',
 
       env: ctx.prod ? {
-        API: JSON.stringify('')
+        API: JSON.stringify(''),
+        WS: JSON.stringify('')
       } : {
-        API: JSON.stringify('http://localhost:9000')
+        API: JSON.stringify('http://localhost:9000'),
+        WS: JSON.stringify('ws://localhost:9000/cable')
       },
 
       scopeHoisting: true,

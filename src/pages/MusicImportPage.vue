@@ -69,12 +69,12 @@
 import {mapState} from 'vuex'
 import {fetch_subdirectories} from 'lib/file_system'
 import AlbumForm from 'components/AlbumForm'
-import ActionCable from 'actioncable'
+import ProcessLogs from 'components/ProcessLogs'
 
 export default {
   name: 'MusicImportPage',
 
-  components: {AlbumForm},
+  components: {AlbumForm, ProcessLogs},
 
   data: function(){
     return {
@@ -165,14 +165,7 @@ export default {
 
     perform () {
       this.importing = true
-
-      // TODO
-      // const cable = ActionCable.createConsumer('ws://localhost:9000/cable')
-      // const subscription = cable.subscriptions.create('logs', {
-      //   received (data) {
-      //     console.log(`[ActionCable] ${data}`)
-      //   }
-      // })
+      this.$q.dialog({component: ProcessLogs})
 
       this.$api.post('import', {path: this.source, source_infos: this.source_infos})
         .then(result => {
@@ -181,7 +174,6 @@ export default {
           this.source_infos = []
         })
         .finally(() => {
-          // subscription.unsubscribe()
           this.importing = false
         })
     }
