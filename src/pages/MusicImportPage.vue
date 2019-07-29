@@ -79,7 +79,7 @@ export default {
   data: function(){
     return {
       step: 1,
-      source: '/Users/vova/Music/Epica - Retrospect CD/CD1',
+      source: '',
       source_error: null,
       source_infos: [],
       preparing: false,
