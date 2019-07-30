@@ -5,13 +5,31 @@
       <dd>{{ get_library_path }}</dd>
     </dl>
 
-    <q-btn color="primary" :loading="scanning_library" @click="rescan_library">
-      Rescan Library
-      <span slot="loading">
+    <q-btn @click="scan_library" :loading="scanning_library" color="primary">
+      Scan Library
+      <template v-slot:loading>
         <q-spinner-pie class="on-left"/>
         Scanning Library...
-      </span>
+      </template>
     </q-btn>
+
+    <q-btn-group class="q-ml-xl" outline>
+      <q-btn @click="purge_library" :loading="purging_library" color="negative" outline>
+        Purge Library
+        <template v-slot:loading>
+          <q-spinner-pie class="on-left"/>
+          Purging Library...
+        </template>
+      </q-btn>
+
+      <q-btn @click="purge_library({with_files: true})" :loading="purging_library" color="negative" outline>
+        With files
+        <template v-slot:loading>
+          <q-spinner-pie class="on-left"/>
+          Purging Library...
+        </template>
+      </q-btn>
+    </q-btn-group>
   </q-page>
 </template>
 
@@ -23,19 +41,32 @@ export default {
 
   data () {
     return {
-      scanning_library: false
+      scanning_library: false,
+      purging_library: false
     }
   },
 
   computed: mapGetters(['get_library_path']),
 
   methods: {
-    rescan_library () {
+    scan_library () {
       this.scanning_library = true
 
-      this.$api.post('library/rescan')
+      this.$axios.post('library/scan')
+        .then((result) => {
+          this.$store.commit('success_message', result.message)
+        })
         .finally(() => {
           this.scanning_library = false
+        })
+    },
+
+    purge_library (options = {}) {
+      this.purging_library = true
+
+      this.$axios.delete('library', {params: options})
+        .finally(() => {
+          this.purging_library = false
         })
     }
   }

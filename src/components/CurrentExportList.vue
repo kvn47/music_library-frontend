@@ -8,7 +8,7 @@
 
     <q-card-actions align="around">
       <q-btn @click="clear_export_list" label="Clear" icon="fas fa-trash" color="negative" outline/>
-      <q-btn @click="perform_export" label="Export" icon="fas fa-upload" color="primary" outline :loading="is_exporting">
+      <q-btn @click="perform_export" label="Export" icon="fas fa-upload" color="primary" :loading="is_exporting">
         <span slot="loading">
           <q-spinner/>
           Exporting...
