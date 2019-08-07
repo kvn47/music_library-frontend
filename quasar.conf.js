@@ -111,7 +111,7 @@ module.exports = function (ctx) {
 
       env: ctx.prod ? {
         API: JSON.stringify(''),
-        WS: JSON.stringify('')
+        WS: JSON.stringify('wss://my3.k4ir05.xyz/cable')
       } : {
         API: JSON.stringify('http://localhost:9000'),
         WS: JSON.stringify('ws://localhost:9000/cable')
