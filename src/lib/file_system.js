@@ -1,12 +1,13 @@
 import axios from 'axios'
 
 const http = axios.create({
-  baseURL: '/fs'
+  headers: {
+    'Accept': 'application/json'
+  }
 })
 
 export const fetch_subdirectories = (path) => {
   return new Promise((resolve, reject) => {
-    // http.get(`${path}/`)
     http.get(path)
       .then(({data}) => {
         const subdirectories = data.filter(child => child.type === 'directory')
