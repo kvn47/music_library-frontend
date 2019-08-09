@@ -10,6 +10,7 @@
           size="xl"
           class="fit"
           flat
+          :stack="is_vertical"
         />
       </div>
       <div class="col-6 section">
@@ -21,6 +22,7 @@
           size="xl"
           class="fit"
           flat
+          :stack="is_vertical"
         />
       </div>
       <div class="col-6 section" v-for="button in buttons" :key="button['route']">
@@ -32,6 +34,7 @@
           size="xl"
           class="fit"
           flat
+          :stack="is_vertical"
         />
       </div>
     </div>
@@ -54,6 +57,12 @@ export default {
         {route: 'organizer', label: 'Organizer', icon: 'fas fa-compact-disc'},
         {route: 'settings', label: 'Settings', icon: 'fas fa-cogs'},
       ]
+    }
+  },
+
+  computed: {
+    is_vertical () {
+      return this.$q.screen.width < this.$q.screen.height
     }
   },
 

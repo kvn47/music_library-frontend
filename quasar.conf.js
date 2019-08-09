@@ -167,8 +167,8 @@ module.exports = function (ctx) {
         description: 'Music Library',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#ffffff',
-        theme_color: '#027be3',
+        background_color: '#cfd8dc',
+        theme_color: '#3f51b5',
         icons: [
           {
             'src': 'statics/icons/icon-128x128.png',
