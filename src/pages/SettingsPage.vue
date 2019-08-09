@@ -13,8 +13,8 @@
       </template>
     </q-btn>
 
-    <q-btn-group class="q-ml-xl" outline>
-      <q-btn @click="purge_library" :loading="purging_library" color="negative" outline>
+    <q-btn-group class="q-ml-xl">
+      <q-btn @click="purge_library" :loading="purging_library" color="negative">
         Purge Library
         <template v-slot:loading>
           <q-spinner-pie class="on-left"/>
@@ -22,7 +22,7 @@
         </template>
       </q-btn>
 
-      <q-btn @click="purge_library({with_files: true})" :loading="purging_library" color="negative" outline>
+      <q-btn @click="purge_library({with_files: true})" :loading="purging_library" color="negative">
         With files
         <template v-slot:loading>
           <q-spinner-pie class="on-left"/>
