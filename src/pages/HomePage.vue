@@ -1,41 +1,40 @@
 <template>
-  <q-page class="flex flex-center" padding>
-    <q-btn-group
-      outline
-      class="full-width"
-    >
-      <q-btn
-        :to="{name: 'notes'}"
-        icon="fas fa-sticky-note"
-        label="Notes"
-        color="primary"
-        size="xl"
-        outline
-        class="full-width"
-      />
-
-      <q-btn
-        @click="new_note"
-        icon="fas fa-plus"
-        color="primary"
-        size="xl"
-        outline
-        class="full-width"
-      />
-    </q-btn-group>
-
-    <q-btn
-      v-for="button in buttons"
-      :key="button['route']"
-      :to="{name: button['route']}"
-      :label="button['label']"
-      :icon="button['icon']"
-      color="primary"
-      size="xl"
-      class="full-width"
-      no-caps
-      outline
-    />
+  <q-page class="flex flex-center">
+    <div class="row full-width bg-blue-grey-2" style="height: 100vh">
+      <div class="col-6 section">
+        <q-btn
+          :to="{name: 'notes'}"
+          icon="fas fa-sticky-note"
+          label="Notes"
+          color="primary"
+          size="xl"
+          class="fit"
+          flat
+        />
+      </div>
+      <div class="col-6 section">
+        <q-btn
+          @click="new_note"
+          icon="fas fa-plus"
+          label="New Note"
+          color="primary"
+          size="xl"
+          class="fit"
+          flat
+        />
+      </div>
+      <div class="col-6 section" v-for="button in buttons" :key="button['route']">
+        <q-btn
+          :to="{name: button['route']}"
+          :label="button['label']"
+          :icon="button['icon']"
+          color="primary"
+          size="xl"
+          class="fit"
+          flat
+        />
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -72,4 +71,7 @@ export default {
 </script>
 
 <style>
+  .section {
+    border: thin outset;
+  }
 </style>
