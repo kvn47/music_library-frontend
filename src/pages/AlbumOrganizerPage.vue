@@ -54,17 +54,17 @@
         />
 
         <q-btn
+          @click="reset"
+          label="Reset"
+          color="warning"
+        />
+
+        <q-btn
           @click="organize"
           :disable="source_infos.length === 0"
           :loading="organizing"
           label="Organize"
           color="primary"
-        />
-
-        <q-btn
-          @click="reset"
-          label="Reset"
-          color="warning"
         />
       </q-card-actions>
     </q-card>
